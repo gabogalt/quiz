@@ -1,16 +1,32 @@
 <div class="alert alert-primary">
 	Agregar una pregunta.
 </div>
-<form action="" action="<?php echo site_url('quiz/add') ?>">
+<?php if ($this->session->flashdata('msg')): ?>
+	<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+	<?php $this->session->flashdata('msg'); ?>
+	<button type="button" class="close" data-dismiss="alert" aria-label="close">
+		<span aria-hidden="true">&times</span>
+	</button>
+	</div>
+<?php endif ?>
+<?php if (validation_errors()) { ?>
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<?php echo validation_errors('<li>', '</li>'); ?>
+		<button type="button" class="close" data-dismiss="alert" aria-label="close">
+		<span aria-hidden="true">&times</span>
+	</button>
+	</div>
+<?php } ?>
+<form method="post" action="<?php echo site_url('quiz/add') ?>">
 	<div class="form-row">
 		<div class="form-group col-md-4">
 			<label for="question_id">Número de Pregunta</label>
-			<input type="number" min="1" class="form-control" id="question" name="question_id" value="">
+			<input type="number" min="1" class="form-control" id="question" name="questions_id" value="<?php echo set_value('question_id', $count_question + 1 ); ?>"> 
 		</div>
 
 		<div class="form-group col-md-8">
 			<label for="question">Pregunta</label>
-			<input type="text"  class="form-control" id="question" name="question_text" value="">
+			<input type="text"  class="form-control" id="question" name="questions_text" value="<?php echo set_value('question_text',); ?>">
 		</div>
 
 		<div class="form-group col-md-6">
